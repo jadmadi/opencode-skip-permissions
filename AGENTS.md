@@ -49,6 +49,7 @@ the flag set, and a deny still blocks.
 ## Layout
 
 - `enabledKey` - the storage key for a session.
+- `isEnabled` - reads the flag for a session.
 - `evaluate` - the hook body, exported for tests.
 - `setup` - registers the command and the hook.
 - `skip-permissions.test.ts` - tests with a fake ctx.
