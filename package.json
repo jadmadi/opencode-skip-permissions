@@ -1,0 +1,25 @@
+{
+  "name": "opencode-skip-permissions",
+  "version": "0.1.0",
+  "description": "OpenCode V2 plugin that auto-approves permission prompts for one session",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "test": "bun test"
+  },
+  "exports": {
+    ".": "./skip-permissions.ts"
+  },
+  "files": [
+    "skip-permissions.ts"
+  ],
+  "keywords": [
+    "opencode",
+    "opencode-plugin",
+    "permissions"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jadmadi/opencode-skip-permissions.git"
+  }
+}
