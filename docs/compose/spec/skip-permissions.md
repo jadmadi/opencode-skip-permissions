@@ -28,7 +28,10 @@ A command toggles auto-allow for one session.
 - The hook upgrades `ask` to `allow` only when the flag is set for the event's
   session. A deny still blocks because the hook never sees it.
 - Enabling prints a clear warning in the command result. The state is
-  session-scoped and resets when the session ends. It never turns on by itself.
+  session-scoped: the flag is keyed by session id, and `/skip-permissions off`
+  removes it. A new session never inherits it. There is no session-end signal,
+  so a resumed session keeps the flag until it is turned off. It never turns on
+  by itself.
 
 ## [S3] Out of Scope
 

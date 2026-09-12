@@ -36,6 +36,7 @@ const plugin = {
         name: "skip-permissions",
         description: "Auto-approve ask decisions for this session, or show the state",
         execute: async ({ sessionID, prompt }: any) => {
+          if (typeof sessionID !== "string") throw new Error("skip-permissions needs a session id")
           const text = typeof prompt?.text === "string" ? prompt.text.trim().toLowerCase() : ""
 
           if (!text || text === "status") {
@@ -51,7 +52,7 @@ const plugin = {
           }
 
           if (text === "off") {
-            await ctx.storage.set(enabledKey(sessionID), false)
+            await ctx.storage.remove(enabledKey(sessionID))
             throw new Error("skip-permissions is off")
           }
 

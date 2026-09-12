@@ -9,6 +9,7 @@ function makeCtx() {
     storage: {
       get: async (key: string) => store.get(key),
       set: async (key: string, value: unknown) => void store.set(key, value),
+      remove: async (key: string) => void store.delete(key),
     },
     command: { transform: (callback: any) => callback({ add: (definition: any) => commands.push(definition) }) },
     permission: { hook: async (name: string, callback: any) => void (hooks[name] = callback) },
@@ -85,11 +86,17 @@ describe("command", () => {
     await (plugin as any).setup(ctx)
 
     await expect(run(commands, "status")).rejects.toThrow(/is off/)
-    await expect(run(commands, "ON")).rejects.toThrow(/is on/)
+    await expect(run(commands, "ON")).rejects.toThrow(/run without approval/)
     expect(store.get(enabledKey("ses_1"))).toBe(true)
     await expect(run(commands, "")).rejects.toThrow(/is on/)
     await expect(run(commands, "off")).rejects.toThrow(/is off/)
-    expect(store.get(enabledKey("ses_1"))).toBe(false)
+    expect(store.get(enabledKey("ses_1"))).toBeUndefined()
+  })
+
+  test("rejects a missing session id", async () => {
+    const { ctx, commands } = makeCtx()
+    await (plugin as any).setup(ctx)
+    await expect(commands[0].execute({ sessionID: undefined, prompt: { text: "on" } })).rejects.toThrow(/needs a session/)
   })
 
   test("rejects an unknown argument", async () => {
