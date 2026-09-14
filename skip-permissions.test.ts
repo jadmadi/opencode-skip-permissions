@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test"
-import plugin, { enabledKey, evaluate, isEnabled } from "./skip-permissions.ts"
+import plugin, { enabledKey, evaluate, isEnabled, VERSION } from "./skip-permissions.ts"
 
 function makeCtx() {
   const store = new Map<string, unknown>()
@@ -116,5 +116,12 @@ describe("command", () => {
     const second = ask()
     await hooks.evaluate(second)
     expect(second.effect).toBe("allow")
+  })
+})
+
+describe("version", () => {
+  test("VERSION matches package.json", async () => {
+    const pkg = (await Bun.file(new URL("./package.json", import.meta.url)).json()) as { version: string }
+    expect(VERSION).toBe(pkg.version)
   })
 })
