@@ -8,6 +8,8 @@
 // The runtime does not resolve @opencode/plugin, so this file exports a plain
 // { id, setup } object.
 
+const VERSION = "0.1.0"
+
 const PREFIX = "skip-permissions/"
 
 function enabledKey(sessionID: string): string {
@@ -41,7 +43,7 @@ const plugin = {
 
           if (!text || text === "status") {
             const state = (await isEnabled(ctx, sessionID)) ? "on" : "off"
-            throw new Error(`skip-permissions is ${state} for this session`)
+            throw new Error(`skip-permissions is ${state} for this session\nskip-permissions ${VERSION}`)
           }
 
           if (text === "on") {
@@ -53,7 +55,7 @@ const plugin = {
 
           if (text === "off") {
             await ctx.storage.remove(enabledKey(sessionID))
-            throw new Error("skip-permissions is off")
+            throw new Error(`skip-permissions is off\nskip-permissions ${VERSION}`)
           }
 
           throw new Error("use /skip-permissions on, /skip-permissions off, or /skip-permissions status")
@@ -65,5 +67,5 @@ const plugin = {
   },
 }
 
-export { enabledKey, evaluate, isEnabled }
+export { enabledKey, evaluate, isEnabled, VERSION }
 export default plugin
