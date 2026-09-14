@@ -3,6 +3,12 @@
 An OpenCode V2 plugin that auto-approves permission prompts for one session,
 while explicit deny rules still block.
 
+## OpenCode
+
+This plugin runs on OpenCode. Install it with my referral link:
+
+https://opencode.ai/go?ref=N9H3ZEP22A
+
 ## Install
 
 ```sh
