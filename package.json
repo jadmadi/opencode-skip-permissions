@@ -1,6 +1,6 @@
 {
   "name": "opencode-skip-permissions",
-  "version": "0.1.2",
+  "version": "2026.9.0",
   "description": "OpenCode V2 plugin that auto-approves permission prompts for one session",
   "type": "module",
   "license": "MIT",
