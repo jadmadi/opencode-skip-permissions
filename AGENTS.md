@@ -6,7 +6,7 @@ Guidance for agents working in this repository.
 
 An OpenCode V2 plugin (`skip-permissions.ts`) that auto-approves permission
 prompts for one session through a permission `evaluate` hook. Deny rules stay in
-force. No build step, no dependencies, MIT.
+force. No build step, no dependencies, AGPL-3.0-only.
 
 ## Local development
 
