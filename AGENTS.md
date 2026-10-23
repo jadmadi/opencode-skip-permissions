@@ -32,7 +32,9 @@ the flag set, and a deny still blocks.
 
 ## Hard constraints
 
-- Do not import `@opencode/plugin`. Export a plain `{ id, setup }` object.
+- Import `{ Plugin } from "@opencode/plugin"` and export
+  `Plugin.define({ id, setup })`. The host provides the module at runtime; do
+  not add it as a package dependency. Tests stub it in `test-preload.ts`.
 - Keep the plugin dependency-free.
 - The hook must only change `ask` to `allow`. Never touch `allow` or `deny`.
 - Never enable the flag automatically.

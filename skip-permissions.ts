@@ -5,10 +5,12 @@
 // explicit configured `deny` is final and never reaches the hook, so a deny
 // still blocks. Nothing is written to the config.
 //
-// The runtime does not resolve @opencode/plugin, so this file exports a plain
-// { id, setup } object.
+// The host provides @opencode/plugin at runtime, so this file uses
+// Plugin.define.
 
-const VERSION = "2026.9.0"
+import { Plugin } from "@opencode/plugin"
+
+const VERSION = "2026.10.0"
 
 const PREFIX = "skip-permissions/"
 
@@ -30,7 +32,7 @@ async function evaluate(ctx: any, event: any): Promise<void> {
   event.message = "skip-permissions is on for this session"
 }
 
-const plugin = {
+const plugin = Plugin.define({
   id: "skip-permissions",
   async setup(ctx: any) {
     await ctx.command.transform((editor: any) => {
@@ -65,7 +67,7 @@ const plugin = {
 
     await ctx.permission.hook("evaluate", (event: any) => evaluate(ctx, event))
   },
-}
+})
 
 export { enabledKey, evaluate, isEnabled, VERSION }
 export default plugin
